@@ -17,14 +17,20 @@ namespace noshadow.backoffice.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "NoShadow é um trabalho de conclusão de curso do curso de Engenharia da Computação " +
+                                  "pela Faculdade de Engenharia de Sorocaba - FACENS, " +
+                                  "realizado desde o segundo semestre de 2017 " +
+                                  "até o final do primeiro semestre do ano de 2018, por José Eduardo de Almeida Junior" +
+                                  " e José Leonardo de Almeida, com orientação de Luis Fernando Vieira e " +
+                                  "coordenação Andréa Braga; com o objetivo de demonstrar as funcionalidades de um " +
+                                  "rastreador veícular com a implementação da tecnologia Dead Reckoning.";
 
             return View();
         }
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "www.facens.br.";
 
             return View();
         }
