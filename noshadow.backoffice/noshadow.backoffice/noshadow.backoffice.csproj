@@ -14,4 +14,7 @@
   <ItemGroup>
     <None Remove="wwwroot\images\point.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Views\Home\point.png" />
+  </ItemGroup>
 </Project>
