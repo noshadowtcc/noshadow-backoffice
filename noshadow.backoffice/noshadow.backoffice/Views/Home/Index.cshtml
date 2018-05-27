@@ -24,16 +24,16 @@
     $(function() {
         $("#map").googleMap({
             zoom: 15, // Initial zoom level (optional)
-            coords: [-23.477276, -47.435171], // Map center (optional)
+            coords: [-23.4698745, -47.429797], // Map center (optional)
             type: "ROADMAP" // Map type (optional)
         });
 
-        $("#map").addMarker({
+        /*$("#map").addMarker({
             coords: [-23.477276, -47.435171],
             icon: 'images/point.png', // Icon URL
             title: '10:48:11',
             text: '20/03/2018 10:48:11 30 km/h'
-        });
+        });*/
 
 
     })
@@ -63,14 +63,33 @@
                     end: fDate
                 },
                 success: function(data) {
+
+                    $("#map").addMarker({
+                        coords: [data[0].latitude, data[0].longitude],
+                        icon: 'images/pointI.png', // Icon URL
+                        title: data[0].logDate,
+                        text: data[0].speed + "km/h " + data[0].height + "m"
+                    });
+                    
+                    for(var i = 1; i < data.length; i++){
+
+                        $("#map").addMarker({
+                            coords: [data[i].latitude, data[i].longitude],
+                            icon: 'images/point.png', // Icon URL
+                            title: data[i].logDate,
+                            text: data[i].speed + "km/h " + data[i].height + "m " + "Coord: " + data[i].latitude + " " + data[i].longitude
+                        });
+
+                    }
+                    
                     
                     //TODO: fazer um for e adicionar markers, o conteúdo está no data
-                    $("#map").addMarker({
+                    /*$("#map").addMarker({
                         coords: [-23.477276, -47.435171],
                         icon: 'images/point.png', // Icon URL
                         title: '10:48:11',
                         text: '20/03/2018 10:48:11 30 km/h'
-                    });
+                    });*/
                 },
                 error: function(data) {
                     debugger;
