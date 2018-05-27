@@ -27,7 +27,7 @@
             coords: [-23.477276, -47.435171], // Map center (optional)
             type: "ROADMAP" // Map type (optional)
         });
-     
+
         $("#map").addMarker({
             coords: [-23.477276, -47.435171],
             icon: 'images/point.png', // Icon URL
@@ -41,27 +41,40 @@
 
 
 <script>
-    $(document).ready(function(){
-        $("p").click(function(){
+    $(document).ready(function() {
+        $("p").click(function() {
             $(this).hide();
         });
-        
+
         $("#btnUpdate").click(function() {
-            var iDate = $("inicialDate").val();
-            var fDate = $("finalDate").val();
-            var device = $("deviceId").val();
+            var iDate = $("#inicialDate").val();
+            var fDate = $("#finalDate").val();
 
             $.ajax({
-                type: "POST",
-                url: "https://noshadow-api-dev.azurewebsites.net/api/location/list",
-                data: {start: "2018-05-01", end: "2018-05-07", deviceId: "FC051539-65BD-4B86-BDAA-8BCE4096BF84"},
+                beforeSend: function(xhrObj){
+                    xhrObj.setRequestHeader("Content-Type","application/json");
+                    xhrObj.setRequestHeader("Accept","application/json");
+                },
+                "url": "home/list",
+                "type": "POST",
+                "dataType": "json",
+                "data" : {
+                    start: iDate,
+                    end: fDate
+                },
                 success: function(data) {
-                    $("span").html(data);
+                    
+                    //TODO: fazer um for e adicionar markers, o conteúdo está no data
+                    $("#map").addMarker({
+                        coords: [-23.477276, -47.435171],
+                        icon: 'images/point.png', // Icon URL
+                        title: '10:48:11',
+                        text: '20/03/2018 10:48:11 30 km/h'
+                    });
                 },
                 error: function(data) {
                     debugger;
-                },
-                dataType: "json"
+                }
             });
         });
     });
