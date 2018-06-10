@@ -58,7 +58,7 @@ namespace noshadow.backoffice.Controllers
                 payload = new GetLocationPayload();
                 
             }
-            payload.DeviceId = Guid.Parse("D152B6C0-1EA9-40A5-A7B9-21A5D0EDA52B");
+            payload.DeviceId = Guid.Parse("3AAD0DB9-7464-43CB-8077-0B7B50D67B80");
             using (var proxy = await _api.GetLocations(payload))
             {
                 switch (proxy.ResponseMessage.StatusCode)
