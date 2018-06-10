@@ -63,12 +63,12 @@
 
                     $("#map").addMarker({
                         coords: [data[0].latitude, data[0].longitude],
-                        icon: 'images/pointI.png', // Icon URL
+                        icon: '1', // Icon URL
                         title: data[0].logDate,
                         text: data[0].speed + "km/h " + data[0].height + "m"
                     });
                     
-                    for(var i = 1; i < data.length; i++){
+                    /*for(var i = 1; i < data.length; i++){
 
                         $("#map").addMarker({
                             coords: [data[i].latitude, data[i].longitude],
@@ -77,7 +77,7 @@
                             text: data[i].speed + "km/h " + data[i].height + "m " + "Coord: " + data[i].latitude + " " + data[i].longitude
                         });
 
-                    }
+                    }*/
                     
                     
                     //TODO: fazer um for e adicionar markers, o conteúdo está no data
