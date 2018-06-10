@@ -24,4 +24,7 @@
   <ItemGroup>
     <None Remove="wwwroot\images\pointI.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Controllers\HomeController.cs___jb_tmp___" />
+  </ItemGroup>
 </Project>
