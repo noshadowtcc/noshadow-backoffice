@@ -8,6 +8,8 @@ namespace noshadow.backoffice.Models
         
         public DateTime? End { get; set; }
         
-        public Guid DeviceId { get; set; }
+        public bool IsDr { get; set; }
+        
+        public Guid? DeviceId { get; set; }
     }
 }

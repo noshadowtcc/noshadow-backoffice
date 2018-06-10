@@ -10,8 +10,8 @@
 <form action="">
     <label for="deviceId">Dispositivo</label>
     <select id="deviceId">
-        <option value="withDR">com DR</option>
-        <option value="noDR">só GPS</option>
+        <option value="true">com DR</option>
+        <option value="false">só GPS</option>
     </select>
     <label for="inicialDate">Data inicial: </label><input id="inicialDate" type="datetime-local" value=""/>
     <label for="finalDate">Data Final: </label><input id="finalDate" type="datetime-local" value=""/>
@@ -46,7 +46,9 @@
         $("#btnUpdate").click(function() {
             var iDate = $("#inicialDate").val();
             var fDate = $("#finalDate").val();
+            var isDr = $("#deviceId").val();
 
+            debugger;
             $.ajax({
                 beforeSend: function(xhrObj){
                     xhrObj.setRequestHeader("Content-Type","application/json");
@@ -55,30 +57,32 @@
                 "url": "home/list",
                 "type": "POST",
                 "dataType": "json",
-                "data" : {
+                "data" : JSON.stringify({
                     start: iDate,
-                    end: fDate
-                },
+                    end: fDate,
+                    isDr: isDr
+                }),
                 success: function(data) {
 
-                    $("#map").addMarker({
-                        coords: [data[0].latitude, data[0].longitude],
-                        icon: '1', // Icon URL
-                        title: data[0].logDate,
-                        text: data[0].speed + "km/h " + data[0].height + "m"
-                    });
-                    
-                    /*for(var i = 1; i < data.length; i++){
-
+                    if (data || data.length > 0) {
                         $("#map").addMarker({
-                            coords: [data[i].latitude, data[i].longitude],
-                            icon: 'images/point.png', // Icon URL
-                            title: data[i].logDate,
-                            text: data[i].speed + "km/h " + data[i].height + "m " + "Coord: " + data[i].latitude + " " + data[i].longitude
-                        });
+                            coords: [data[0].latitude, data[0].longitude],
+                            icon: 'images/pointI.png', // Icon URL
+                            title: data[0].logDate,
+                            text: data[0].speed + "km/h " + data[0].height + "m"
+                        }); 
+                        
+                        for(var i = 1; i < data.length; i++){
 
-                    }*/
-                    
+                            $("#map").addMarker({
+                                coords: [data[i].latitude, data[i].longitude],
+                                icon: 'images/point.png', // Icon URL
+                                title: data[i].logDate,
+                                text: data[i].speed + "km/h " + data[i].height + "m " + "Coord: " + data[i].latitude + " " + data[i].longitude
+                            });
+
+                        }
+                    }
                     
                     //TODO: fazer um for e adicionar markers, o conteúdo está no data
                     /*$("#map").addMarker({

@@ -52,19 +52,20 @@ namespace noshadow.backoffice.Controllers
         [HttpPost]
         public async Task<IActionResult> List([FromBody] GetLocationPayload payload)
         {
-
             if (payload == null)
             {
                 payload = new GetLocationPayload();
-                
             }
-            payload.DeviceId = Guid.Parse("3AAD0DB9-7464-43CB-8077-0B7B50D67B80");
+            
+            payload.DeviceId = payload.IsDr ? Guid.Parse("BB10BB26-A2F7-490B-80C0-3AA7625866CB"): Guid.Parse("3AAD0DB9-7464-43CB-8077-0B7B50D67B80");
+
             using (var proxy = await _api.GetLocations(payload))
             {
                 switch (proxy.ResponseMessage.StatusCode)
                 {
                     case HttpStatusCode.OK:
-                        return Json(proxy.GetContent());
+                        var data = proxy.GetContent();
+                        return Json(data);
                     default:
                         return Redirect("~/home/error");
                 }
